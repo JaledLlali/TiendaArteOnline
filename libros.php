@@ -1,8 +1,7 @@
 <?php
 require "php/sesion.php";
 require "php/conn.php";
-//Recuperamos los productos en un array
-$sql = "SELECT * FROM productos ORDER BY masvendido DESC, nombre";
+$sql = "SELECT * FROM productos WHERE tipo='1' ORDER BY fecha DESC";
 $r = mysqli_query($conn, $sql);
 $productos = array();
 while($row = mysqli_fetch_array($r)){
@@ -12,7 +11,7 @@ while($row = mysqli_fetch_array($r)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Mi sitio</title>
+	<title>Todos los libros</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,8 +32,9 @@ while($row = mysqli_fetch_array($r)){
 		</div>
 		<div class="collapse navbar-collapse" id="menu">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.php">Inicio</a></li>
-				<li><a href="productos.php">Productos</a></li>
+				<li><a href="index.php">Inicio</a></li>
+				<li><a href="cursos.php">Cursos</a></li>
+				<li class="active"><a href="libros.php">Libros</a></li>
 				<li><a href="sobremi.php">Sobre mi</a></li>
 				<li><a href="contacto.php">Contacto</a></li>
 			</ul>
@@ -47,22 +47,23 @@ while($row = mysqli_fetch_array($r)){
 
 <div class="jumbotron">
 	<div class="container text-center">
-		<h1>Los mejores productos de la red</h1>
-		<p>Nuestro slogan</p>
+		<h1>Todos los libros</h1>
+		<p>Los mejores productos de la red</p>
 	</div>
 </div>
 
 <div class="container-fluid bg-3 text-center">
-	<?php
-	//Mostramos los productos por filas
+<?php
 	$ren = 0;
 	for ($i=0; $i < count($productos) ; $i++) { 
 		if ($ren==0) {
 			print '<div class="row">';
 		}
 		print '<div class="col-sm-3">';
-		print '<img src="img/'.$productos[$i]["imagen"].'" class="img-responsive img-rounded" style="width:100%" alt="'.$productos[$i]["nombre"].'">';
 		print '<p><a href="producto.php?id='.$productos[$i]["id"].'">'.$productos[$i]["nombre"].'</a></p>';
+		print '<img src="img/'.$productos[$i]["imagen"].'" class="img-responsive img-rounded" style="width:100%" alt="'.$productos[$i]["nombre"].'">';
+		print '<p>'.$productos[$i]["descripcion"].'</p>';
+		print '<a href="producto.php?id='.$productos[$i]["id"].'" class="btn btn-info">$'.$productos[$i]["precio"].'</a>';
 		print '</div>';
 		$ren++;
 		if ($ren==4) {
@@ -70,9 +71,10 @@ while($row = mysqli_fetch_array($r)){
 			print "</div>";
 		}
 	}
-	?>
+	print '<br><br>';
+?>
 </div><br>
-
+<br>
 
 <footer class="container-fluid text-center">
 	<p>Todos los derechos reservados &copy;</p>
