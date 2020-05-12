@@ -113,11 +113,11 @@ function despliegaCarritoCompleto($carrito, $verifica, $conn){
 		print '<input type="number" name="c'.$i.'" value="'.$data['cantidad'].'" min="1" max="99"/>';
 		print '<input type="hidden" name="i'.$i.'" value="'.$data['producto'].'"/>';
 		print '</td>';
-		print '<td class="text-right">$'.$data['precio'].'</td>';
-		print '<td class="text-right">$'.$tot.'</td>';
+		print '<td class="text-right">'.$data['precio'].'€</td>';
+		print '<td class="text-right">'.$tot.'€</td>';
 		print '<td>&nbsp;</td>';
 		//Borrar productos
-		print '<td class="text-right"><a href="carrito.php?m=b&id='.$data['producto'].'" class="btn btn-danger">Borrar</a></td>';
+		print '<td class="text-right"><a href="carrito.php?m=b&id='.$data['producto'].'" class="btn btn-outline-danger">Borrar</a></td>';
 		print '</tr>';
 		//+= sirve para sumar a una variable (numérica) otro número y que el resultado sea el valor de la primera variable. 
 		//Ej: $a = 3; $a += 5; establece $a en 8, como si se hubiera dicho: $a = $a + 5;
@@ -134,30 +134,30 @@ function despliegaCarritoCompleto($carrito, $verifica, $conn){
 	print '<tr>';
 	print '<td width="79.85%"></td>';
 	print '<td width="11.55%">Subtotal:</td>';
-	print '<td width="9.20%">€'.number_format($subtotal,2).'</td>';
+	print '<td width="9.20%">'.number_format($subtotal,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td></td>';
 	print '<td>Descuento:</td>';
-	print '<td>$'.number_format($descuento,2).'</td>';
+	print '<td>'.number_format($descuento,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td></td>';
 	print '<td>Costo de envío:</td>';
-	print '<td>€'.number_format($envio,2).'</td>';
+	print '<td>'.number_format($envio,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td></td>';
-	print '<td>Gran total:</td>';
-	print '<td>€'.number_format($total,2).'</td>';
+	print '<td>Total:</td>';
+	print '<td>'.number_format($total,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
-	print '<td><a href="index.php" class="btn btn-info" role="button">Seguir comprando</a></td>';
-	print '<td><input type="submit" class="btn btn-info" role="button" value="Recalcular"></td>';
+	print '<td><a href="index.php" class="btn btn-outline-secondary" role="button">Seguir comprando</a></td>';
+	print '<td><input type="submit" class="btn btn-outline-info" role="button" value="Recalcular"></td>';
 	if($verifica){
-		print '<td><a href="gracias.php" class="btn btn-success" role="button">Pagar</a></td>';
+		print '<td><a href="gracias.php" class="btn btn-outline-success" role="button">Pagar</a></td>';
 	} else {
-		print '<td><a href="checkout.php" class="btn btn-success" role="button">Pagar</a></td>';
+		print '<td><a href="checkout.php" class="btn btn-outline-success" role="button">Pagar</a></td>';
 	}
 	print '</tr>';
 	print '</table>';
@@ -212,8 +212,8 @@ function despliegaCarritoPago($carrito, $verifica, $conn){
 		print '<input type="number" name="c'.$i.'" value="'.$data['cantidad'].'" min="1" max="99"/>';
 		print '<input type="hidden" name="i'.$i.'" value="'.$data['producto'].'"/>';
 		print '</td>';
-		print '<td class="text-right">$'.$data['precio'].'</td>';
-		print '<td class="text-right">$'.$tot.'</td>';
+		print '<td class="text-right">'.$data['precio'].'€</td>';
+		print '<td class="text-right">'.$tot.'€</td>';
 		print '<td>&nbsp;</td>';
 		//Borrar productos
 		print '<td class="text-right"><a href="carrito.php?m=b&id='.$data['producto'].'" class="btn btn-danger">Borrar</a></td>';
@@ -233,22 +233,22 @@ function despliegaCarritoPago($carrito, $verifica, $conn){
 	print '<tr>';
 	print '<td width="79.85%"></td>';
 	print '<td width="11.55%">Subtotal:</td>';
-	print '<td width="9.20%">€'.number_format($subtotal,2).'</td>';
+	print '<td width="9.20%">'.number_format($subtotal,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td></td>';
 	print '<td>Descuento:</td>';
-	print '<td>€'.number_format($descuento,2).'</td>';
+	print '<td>'.number_format($descuento,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td></td>';
 	print '<td>Costo de envío:</td>';
-	print '<td>€'.number_format($envio,2).'</td>';
+	print '<td>'.number_format($envio,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td></td>';
 	print '<td>Gran total:</td>';
-	print '<td>€'.number_format($total,2).'</td>';
+	print '<td>'.number_format($total,2).'€</td>';
 	print '</tr>';
 	print '<tr>';
 	print '<td><a href="index.php" class="btn btn-info" role="button">Seguir comprando</a></td>';
@@ -279,34 +279,11 @@ function despliegaCarritoConsulta($carrito, $conn){
 	$sql .= "c.idProducto=p.id";
 	//Leemos el query
 	$r = mysqli_query($conn, $sql);
-	print '<table class="table table-striped" width="100%">';
-	print '<tr>';
-	print '<th width="12%">Producto</th>';
-	print '<th width="30%">Nombre</th>';
-	print '<th width="1.8%">Cant.</th>';
-	print '<th width="15.12%" class="text-center">Precio</th>';
-	print '<th width="15.12%" class="text-center">Descuento</th>';
-	print '<th width="15.12%" class="text-center">Envío</th>';
-	print '<th width="23.12%" class="text-center">Subtotal</th>';
-	print '</tr>';
 	//Calculamos el total y mostramos los datos
 	while ($data=mysqli_fetch_assoc($r)) {
 		$nom =$data['nombre'];
 		$num = $data['producto'];
 		$tot = $data['cantidad']*$data['precio']-$data['descuento']+$data['envio'];
-		print '<tr>';
-		print '<td>';
-		print '<img src="../img/'.$data['imagen'].'" width="105" alt="'.$nom.'">';
-		print '</td>';
-		print '<td>';
-		print '<p><b>'.$data['nombre'].'</b></p>';
-		print '</td>';
-		print '<td class="text-center">'.$data['cantidad'].'</p></td>';
-		print '<td class="text-right">€'.number_format($data['precio'],2).'</td>';
-		print '<td class="text-right">€'.number_format($data['descuento'],2).'</td>';
-		print '<td class="text-right">€'.number_format($data['envio'],2).'</td>';
-		print '<td class="text-right">€'.number_format($tot,2).'</td>';
-		print '</tr>';
 		//+= sirve para sumar a una variable (numérica) otro número y que el resultado sea el valor de la primera variable. 
 		//Ej: $a = 3; $a += 5; establece $a en 8, como si se hubiera dicho: $a = $a + 5;
 		$subtotal += $tot;
@@ -315,16 +292,44 @@ function despliegaCarritoConsulta($carrito, $conn){
 		$can += $data['cantidad'];
 	}
 	$total = $subtotal + $envio - $descuento;
-	print '<tr>';
-	print '<td>&nbsp;</td>';
-	print '<td class="text-right">Totales:</td>';
-	print '<td class="text-center">'.$can.'</p></td>';
-	print '<td class="text-right">€'.number_format($subtotal,2).'</td>';
-	print '<td class="text-right">€'.number_format($descuento,2).'</td>';
-	print '<td class="text-right">€'.number_format($envio,2).'</td>';
-	print '<td class="text-right">€'.number_format($total,2).'</td>';
-	print '</tr>';
-	print '</table>';
+
 }
 
+function calculaTotal($carrito, $conn){
+	//Variables de trabajo
+	$subtotal = 0;
+	$descuento = 0;
+	$envio = 0;
+	$total = 0;
+	//Leer los datos del carrito
+	$sql = "SELECT c.idUsuario as usuario, ";
+	$sql .= "c.idProducto as producto, ";
+	$sql .= "c.cantidad as cantidad, ";
+	$sql .= "c.precio as precio, ";
+	$sql .= "c.envio as envio, ";
+	$sql .= "c.descuento as descuento, ";
+	$sql .= "p.imagen as imagen, ";
+	$sql .= "p.descripcion as descripcion, ";
+	$sql .= "p.nombre as nombre ";
+	$sql .= "FROM carrito as c, productos as p ";
+	$sql .= "WHERE num='".$carrito."' AND ";
+	$sql .= "c.idProducto=p.id";
+	//Leemos el query
+	$r = mysqli_query($conn, $sql);
+	$i=0;
+	while ($data=mysqli_fetch_assoc($r)) {
+		$desc = $data['nombre'].":</b> ".substr($data['descripcion'],0,250);
+		$nom =$data['nombre'];
+		$num = $data['producto'];
+		$tot = $data['cantidad']*$data['precio'];
+		//+= sirve para sumar a una variable (numérica) otro número y que el resultado sea el valor de la primera variable. 
+		//Ej: $a = 3; $a += 5; establece $a en 8, como si se hubiera dicho: $a = $a + 5;
+		$subtotal += $tot;
+		$descuento += $data["descuento"];
+		$envio += $data["envio"];
+		$i++;
+	}
+	$total = $subtotal + $envio - $descuento;
+	echo $total;
+}
 ?>

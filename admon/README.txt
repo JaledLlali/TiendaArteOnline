@@ -1,1 +1,0 @@
-Aquí van todos los archivos relacionados con la parte administrativa de la página

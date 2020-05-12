@@ -5,44 +5,7 @@ function validaFecha($fecha){
 	//mm, dd, aa
 	return checkdate($fecha_array[1],$fecha_array[2],$fecha_array[0]);
 }
-function validaImagen($producto, $anchoNuevo){
-	$archivo = "../img/".$producto;
-	//print $archivo."<br>";
-	
-	//Recuperamos los datatos de la imagen
-	$info = getimagesize($archivo);
-	$ancho = $info[0];
-	$alto = $info[1];
-	$tipo = $info["mime"];
-	
-	//Calculamos la proporcionalidad
-	$nuevoAncho = $anchoNuevo;
-	$factor = $anchoNuevo / $ancho;
-	$nuevoAlto = $alto * $factor;
-	
-	//Creamos un nuevo objeto
-	switch($tipo){
-		case "image/jpg":
-		case "image/jpeg":
-			$imagen = imagecreatefromjpeg($archivo);
-			break;
-		case "image/png":
-			$imagen = imagecreatefrompng($archivo);
-			break;	
-		case "image/gif":
-			$imagen = imagecreatefromgif($archivo);
-			break;
-	}
-	
-	//Creamos un "recipiente"
-	$lienzo = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-	
-	//Vaciamos la imagen modificada en el lienzo
-	imagecopyresampled($lienzo, $imagen, 0,0, 0,0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-	
-	//Creamos el nuevo archivo
-	imagejpeg($lienzo, "../img/".$producto, 80);
-}
+
 function escapaCadena($cadena){
 	$cadena = escapeshellcmd($cadena);
 	//print $cadena;

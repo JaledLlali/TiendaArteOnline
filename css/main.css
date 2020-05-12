@@ -1,37 +1,120 @@
-.navbar{
-	margin-bottom: 0;
-	border-radius: 0;
+@charset "utf-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
+a {
+	outline: none;
 }
+
+.navbar-container {
+	text-align: center;
+	background-color: white;
+	padding: 10px;
+	font-size: 0;
+}
+
+.navbar-container ul {
+	margin: 0;
+	padding: 0;
+	text-align: right;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.navbar-container ul li {
+	display: inline-block;
+	font-size: 16px;
+}
+
+.navbar-container ul li a {
+	color: #252525;
+	text-decoration: none;
+	display: inline-block;	
+	padding: 10px;
+	transition: color 0.5s;
+}
+
+.navbar-container ul li .underline {
+	height: 3px;
+	background-color: transparent;
+	width: 0%;
+	transition: width 0.2s, background-color 0.5s;
+	margin: 0 auto;
+}
+
+.navbar-container ul li.active-link .underline {
+	width: 100%;
+	background-color:#72421D;
+}
+
+.navbar-container ul li:hover .underline {
+	background-color: #72421D;
+	width: 100%;
+}
+
+.navbar-container ul li:hover a {
+}
+
+.navbar-container ul li:active a {
+	transition: none;
+	color: rgba(255,255,255,0.76);
+}
+
+.navbar-container ul li:active .underline {
+	transition: none;
+	background-color: rgba(255,255,255,0.76);
+}
+
 .jumbotron{
-	background-image: url(../img/fondo-banner.jpg);
-	color: white;
+	background-image: url("../img/2307900.jpg");
+	background-size:cover;
+	color: black;
+	opacity: 0.8;
 }
-footer{
-	background-color: black;
-	padding: 25px;
-	color: white;
+
+.footer {
+  margin-top: 100px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:#D8D8D8;
+  color: white;
+  text-align: center;
 }
-.row.content{
-	height: auto;
+
+@media screen and (max-width: 600px) {
+  .topnav ul li a:not(:first-child) {display: none;}
+  .topnav ul li a.icon {
+    float: right;
+    display: block;
+  }
 }
-footer > a{
-	color: white;
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive ul li a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
-.sidenav{
-	padding-top: 20px;
-	background-color: #f1f1f1;
-	height: auto;
-}
-#contenedor{padding: 5px 25px; margin-top: 25px;}
-.izq{
-	float: left;
-	margin-right: 10px;
-}
-th{ 
-	background: gray; 
-	color:white;
-}
-td{
-	vertical-align: top;
-	padding-top: 10px;
-}
+
+/* Media query for mobile viewport */
+    @media screen and (max-width: 400px) {
+        #paypal-button-container {
+           width: 100%;
+        }
+    }
+   
+    /* Media query for desktop viewport */
+    @media screen and (min-width: 400px) {
+        #paypal-button-container {
+           width: 250px;
+            display: inline-block;
+        }
+    }

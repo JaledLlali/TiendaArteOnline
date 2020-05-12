@@ -8,80 +8,72 @@ if(!isset($_SESSION["usuario"])){
 	exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-	<title>Verifica la compra</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
-	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-	<style>
-   
-    /* Media query for mobile viewport */
-    @media screen and (max-width: 400px) {
-        #paypal-button-container {
-           width: 100%;
-        }
-    }
-   
-    /* Media query for desktop viewport */
-    @media screen and (min-width: 400px) {
-        #paypal-button-container {
-           width: 250px;
-            display: inline-block;
-        }
-    }
-   
-</style>
+<meta charset="utf-8">
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/main.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<title>Checkout</title>
 </head>
+
 <body>
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href="index.php" class="navbar-brand">Mi sitio</a>
-		</div>
-		<div class="collapse navbar-collapse" id="menu">
-			<ul class="nav navbar-nav">
-				<li><a href="index.php">Inicio</a></li>
-				<li><a href="productos.php">Productos</a></li>
-				<li><a href="sobremi.php">Sobre mi</a></li>
-				<li class="active"><a href="contacto.php">Contacto</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<?php require "php/navbar.php"; ?>
-			</ul>
+	<header class="d-flex justify-content-center align-items-center">
+			<a href="index.php" class=" justify-content-center "><img src="img/Logotipo_All.png" alt="logo" style="max-width: 50px;"></a>
+			<a href="index.php" style="font-family: 'Major Mono Display', monospace; text-decoration: none; color:black">AnA LeAL</a>
+	</header>
+	<div class="navbar-container">
+		<ul>
+			<li class="nav-link">
+				<a href="index.php">Inicio
+				</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link active-link">
+				<a href="productos.php">Productos</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="sobremi.php">Sobre mi</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="contacto.php">Contacto</a>
+				<div class="underline"></div>
+			</li>
+			
+		</ul>
+		<ul class="nav-link">
+			<?php require "php/navbar.php"; ?>
+		</ul>
+	</div>
+
+	<div class="container-fluid text-center mt-5">
+		<div id="paypal-button-container"></div>
+		<div class="mt-2">
+			<a href="php/detalleVenta.php" class="btn btn-outline-info">Descargar comprobante de compra</a>
 		</div>
 	</div>
-</nav>
 
-<div class="container-fluid text-center">
-	<div class="row content">
-		<div class="col-sm-2 sidenav">
-			<h4>Productos más vendidos</h4>
-			<?php masVendidos($conn); ?>
-		</div>
-		<div class="col-sm-8 text-left" id="paypal-button-container">
-			<script>
+
+	<footer class="footer" style="position: fixed">
+		<div class="text-muted">Todos los derechos reservados</div>
+	</footer>
+
+	<script>
     paypal.Button.render({
         env: 'sandbox', // sandbox | production
         style: {
             label: 'checkout',  // checkout | credit | pay | buynow | generic
-            size:  'responsive', // small | medium | large | responsive
+            size:  'medium', // small | medium | large | responsive
             shape: 'pill',   // pill | rect
-            color: 'gold'   // gold | blue | silver | black
+            color: 'black'   // gold | blue | silver | black
         },
- 
-        // PayPal Client IDs - replace with your own
-        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
  
         client: {
             sandbox:    'ASLlSl2NwD7NXo9EN0dyvqbrQc9iSP7aQc2kVS6IMxXJMjpmOf02iYO0TlJVF0Rb5fXs4UuN3Rq0HOso',
@@ -95,8 +87,8 @@ if(!isset($_SESSION["usuario"])){
                 payment: {
                     transactions: [
                         {
-                            amount: { total: '0.01', currency: 'MXN' },
-                            description:"Compra de productos a Develoteca:$0.01",
+                            amount: { total:'<?php calculaTotal($carrito, $conn)?>', currency: 'EUR' },
+                            description:"Compra de productos a Ana Leal",
                             custom:"Codigo"
                         }
                     ]
@@ -116,13 +108,7 @@ if(!isset($_SESSION["usuario"])){
     }, '#paypal-button-container');
  
 </script>
-		</div>
-	</div>
-</div>
 
-<footer class="container-fluid text-center">
-<a href="aviso.php">Aviso de privacidad</a>
-</footer>
-
+	
 </body>
 </html>

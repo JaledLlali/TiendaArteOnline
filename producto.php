@@ -16,102 +16,89 @@ function muestraProductoRelacionado($id, $conn)
 	$r = mysqli_query($conn, $sql);
 	$data = mysqli_fetch_assoc($r);
 	//Desplegamos etiquetas concatenando 
-	print '<div class="well">'.$data["nombre"];
+	print '<div class="well text-center"><a class="badge badge-light mb-1" href="producto.php?id='.$id.'">'.$data["nombre"].'</a>';
 	print '<a href="producto.php?id='.$id.'"><img src="img/'.$data["imagen"].'" class="media-object img-resposvive" width="100%"></a>';
 	print '</div>';
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-	<title>Productos</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/main.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<title>Productos</title>
 </head>
+
 <body>
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href="index.php" class="navbar-brand">Mi sitio</a>
-		</div>
-		<div class="collapse navbar-collapse" id="menu">
-			<ul class="nav navbar-nav">
-				<li><a href="index.php">Inicio</a></li>
-				<li class="active"><a href="productos.php">Productos</a></li>
-				<li><a href="sobremi.php">Sobre mi</a></li>
-				<li><a href="contacto.php">Contacto</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<?php require "php/navbar.php"; ?>
-			</ul>
-		</div>
+	<header class="d-flex justify-content-center align-items-center">
+			<a href="index.php" class=" justify-content-center "><img src="img/Logotipo_All.png" alt="logo" style="max-width: 50px;"></a>
+			<a href="index.php" style="font-family: 'Major Mono Display', monospace; text-decoration: none; color:black">AnA LeAL</a>
+	</header>
+	<div class="navbar-container">
+		<ul>
+			<li class="nav-link">
+				<a href="index.php">Inicio
+				</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link active-link">
+				<a href="productos.php">Productos</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="sobremi.php">Sobre mi</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="contacto.php">Contacto</a>
+				<div class="underline"></div>
+			</li>
+			
+		</ul>
+		<ul class="nav-link">
+			<?php require "php/navbar.php"; ?>
+		</ul>
 	</div>
-</nav>
-
-<div class="container-fluid text-center">
-	<div class="row content">
-		<div class="col-sm-2 sidenav">
-			<img src="img/<?php print $data['imagen']; ?>" class="media-object img-resposvive" width="100%"/>
-			<br>
-			<h4>Núm. producto: <?php print $data['id']; ?></h4>
-			<h4>precio: <?php print $data['precio']; ?>€</h4>
-			<br><br>
-			<div class="well"><p>Carrito de compras</p>
-			<p>Total: <?php print despliegaCarrito($carrito, $conn); ?>€</p>
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-lg-9">
+				<div>
+					<div class="display-4"><?php print $data['nombre']; ?></div>
+					<div class="mt-3 mb-3"><img src="img/<?php print $data['imagen']; ?>" class="img-fluid" alt="Responsive image" style="max-width: 700px;"></div>
+					<div><?php print $data['descripcion']; ?></div>
+					<div class="mt-3 d-flex justify-content-end">
+						<h6>Precio:<?php print $data['precio']; ?> €</h6>
+					</div>
+					<div class="mt-3 d-flex justify-content-end">
+							<a href="index.php" class="btn btn-outline-secondary mr-2" role="button">Regresar</a>
+							<a href="carrito.php?id=<?php print $id; ?>" class="btn btn-outline-success " role="button">Añadir al carrito</a>
+					</div>
+				</div>
 			</div>
-			<a href="carrito.php?id=<?php print $id; ?>" class="btn btn-success" role="button">Carrito</a>
-			<a href="index.php" class="btn btn-info" role="button">Regresar</a>
-		</div>
-		<div class="col-sm-8 text-left">
-		<h2><?php print $data['nombre']; ?></h2>
-		<br>
-		<?php
-		if($data['tipo']=="0"){
-			print '<h4>Descripción:</h4>';		
-			print '<p>'.$data['descripcion'].'</p>';
-		} else if($data['tipo']=="1"){
-			print '<h4>Resumen:</h4>';		
-			print '<p>'.$data['descripcion'].'</p>';
-		}
-		?>
-		</div>
-		<div class="col-sm-2 sidenav">
-		<?php
-		if($data["tipo"]=="0"){
-			print '<h4>Productos relacionados</h4>';
-			print '<div class="well">';
-			if ($data["relacion1"]!=0) {
+			<div class="col-lg-3">
+				<p class=" text-center">Productos relacionados:</p>
+				<br>
+				<?php
+				if ($data["relacion1"]!=0) {
 				muestraProductoRelacionado($data["relacion1"], $conn);
-			}
-			if ($data["relacion2"]!=0) {
-				muestraProductoRelacionado($data["relacion2"], $conn);
-			}
-			if ($data["relacion3"]!=0) {
-				muestraProductoRelacionado($data["relacion3"], $conn);
-			}
-		} else if($data["tipo"]=="1"){
-			print '<h4>Productos nuevos</h4>';
-			print '<div class="well">';
-			nuevos($conn);
-		}
-		?>
-		
+				}
+				if ($data["relacion2"]!=0) {
+					muestraProductoRelacionado($data["relacion2"], $conn);
+				}
+				if ($data["relacion3"]!=0) {
+					muestraProductoRelacionado($data["relacion3"], $conn);
+				}
+				?>
+			</div>
 		</div>
 	</div>
-</div>
-
-<footer class="container-fluid text-center">
-<a href="aviso.php">Aviso de privacidad</a>
-</footer>
-
+	<footer class="footer">
+		<div class="text-muted">Todos los derechos reservados</div>
+	</footer>
 </body>
 </html>

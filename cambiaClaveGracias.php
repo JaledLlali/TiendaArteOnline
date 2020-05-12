@@ -1,69 +1,52 @@
-<?php
-require "php/conn.php";
-require "php/sesion.php";
-require "php/laterales.php";
-?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-	<title>Cambia clave Gracias</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/main.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<title>Cambiar Clave</title>
 </head>
+
 <body>
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a href="index.php" class="navbar-brand">Mi sitio</a>
-		</div>
-		<div class="collapse navbar-collapse" id="menu">
-			<ul class="nav navbar-nav">
-				<li><a href="index.php">Inicio</a></li>
-				<li><a href="cursos.php">Cursos</a></li>
-				<li><a href="libros.php">Libros</a></li>
-				<li><a href="sobremi.php">Sobre mi</a></li>
-				<li class="active"><a href="contacto.php">Contacto</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<?php require "php/navbar.php"; ?>
-			</ul>
-		</div>
+	<header class="d-flex justify-content-center align-items-center">
+			<a href="index.php" class=" justify-content-center "><img src="img/Logotipo_All.png" alt="logo" style="max-width: 50px;"></a>
+			<a href="index.php" style="font-family: 'Major Mono Display', monospace; text-decoration: none; color:black">AnA LeAL</a>
+	</header>
+	<div class="navbar-container">
+		<ul>
+			<li class="nav-link">
+				<a href="index.php">Inicio
+				</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="productos.php">Productos</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="sobremi.php">Sobre mi</a>
+				<div class="underline"></div>
+			</li>
+			<li class="nav-link">
+				<a href="contacto.php">Contacto</a>
+				<div class="underline"></div>
+			</li>
+			
+		</ul>
+		<ul class="nav-link">
+			<?php require "php/navbar.php"; ?>
+		</ul>
 	</div>
-</nav>
-
-<div class="container-fluid text-center">
-	<div class="row content">
-		<div class="col-sm-2 sidenav">
-			<h4>Productos más vendidos</h4>
-			<?php masVendidos($conn); ?>
-		</div>
-		<div class="col-sm-8 text-center">
-			<div class="well" id="contenedor">
-				<h2>Cambio de clave de acceso exitosa</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut massa eget odio porttitor rutrum. Aliquam vulputate lacus sem, non congue mauris venenatis id. Praesent elementum in purus ut dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed nec sodales ligula. Duis lobortis hendrerit enim, condimentum accumsan purus pellentesque ac. Phasellus neque nisl, scelerisque vel leo ac, condimentum sodales mauris.</p>
-				<a href="index.php" class="btn btn-success" role="button">Regresar</a>
-				
-			</div>
-		</div>
-		<div class="col-sm-2 sidenav">
-		<h4>Productos relacionados</h4>
-		<?php nuevos($conn); ?>
-		</div>
+	<div class="container-fluid mt-5 text-center">
+		<p class="display-4">Cambio de contraseña exitoso</p>
+		<a href="index.php" class="btn btn-outline-info mt-4" role="button">Regresar</a>
 	</div>
-</div>
-
-<footer class="container-fluid text-center">
-<a href="aviso.php">Aviso de privacidad</a>
-</footer>
-
+	<footer class="footer">
+		<div class="text-muted">Todos los derechos reservados</div>
+	</footer>
 </body>
 </html>
